@@ -21,5 +21,10 @@ cmethods={'SPM',...
     'Hybrid SPM & FSL',...
     'Hybrid SPM & BRAINSFIT'};
 
+prefs = ea_prefs;
+if prefs.env.dev
+    cmethods = [cmethods, 'ANTs Nonlinear Coregistration'];
+end
+
 set(handles.coregmrpopup,'String',cmethods)
 set(handles.coregmrpopup,'Value',1); % default SPM

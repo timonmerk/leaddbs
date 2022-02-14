@@ -1,5 +1,5 @@
 function ea_coregmr(options)
-% wrapper for coreg routines
+% wrapper for coregister post-op MR to pre-op MR
 
 % in CT imaging, coregistration is done elsewhere.
 % also ignore when there is no tra/cor/sag existing (normal conn study)
@@ -48,6 +48,11 @@ switch options.coregmr.method
     case 'Hybrid SPM & BRAINSFIT' % Hybrid SPM -> Brainsfit
         ea_coregmr_spm(options,0); % dont use doreslice here to refrain for doing two interpolations.
         ea_coregmr_brainsfit(options);
+    case 'ANTs Nonlinear Coregistration'
+        warning('off', 'backtrace');
+        warning('ANTs nonlinear coregistration only supports pre-op to pre-op registration, falling back to linear coregistration now!')
+        warning('on', 'backtrace');
+        ea_coregmr_ants(options,0);
 end
 
 ea_dumpnormmethod(options,options.coregmr.method,'coregmrmethod');

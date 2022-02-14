@@ -84,6 +84,10 @@ switch lower(options.coregmr.method)
         affinefile = ea_brainsfit(fixed,...
             moving,...
             ofile,writeoutmat,otherfiles);
+    case 'ants nonlinear coregistration'
+        transforms = ea_ants_nonlinear_coreg(fixed, moving, ofile, ...
+            options.prefs.machine.normsettings, 'NULL', 'NULL', 'ea_antspreset_ants_wiki');
+        ea_delete(transforms);
 end
 
 % ea_conformspaceto(fixed, ofile); % fix qform/sform issues.
