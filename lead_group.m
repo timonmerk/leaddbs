@@ -1968,6 +1968,9 @@ if isfield(M,'clinical')
                     scores.(score_type).(postop_flag).(str_to_cmp).value = M.clinical.vars{1,i}(pt);   
                 end
             end
+            if ~isfield(scores,'guid')
+                scores.guid = M.guid;
+            end
             save(score_file,'scores')
             disp("Process Done ***")
         end
